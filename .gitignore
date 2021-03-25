@@ -3,8 +3,9 @@
 .ipynb_checkpoints
 
 
+#file types to ignore
+*.h5
+*.pyc
 
 #files to ignore
 practicing.py
-mriClassifier.h5
-pyScripts/__pycache__/classifier.cpython-37.pyc
