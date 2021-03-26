@@ -38,6 +38,7 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 from torch.utils.tensorboard import SummaryWriter
 import sys
+from keras import backend as K
 
 #python files
 sys.path.insert(1, '/nvme_ssd/testing/fistaReconstruction/UTILS')
@@ -54,9 +55,12 @@ class Autoencoder():
         optimizer = Adam(lr=0.001)
         
         self.autoencoder_model = self.build_model()
-        self.autoencoder_model.compile(loss='mse', optimizer=optimizer)
+
+        self.autoencoder_model.compile(loss='mse', optimizer=optimizer,metrics=[self.PSNR,self.ssim])
         self.autoencoder_model.summary()
-    
+    def ssim(self,y_true,y_pred):
+        return tf.image.ssim(y_true,y_pred,max_val=1)
+
     def build_model(self):
         """
         This is the model that will 
@@ -80,7 +84,9 @@ class Autoencoder():
         
         return Model(input_layer, output_layer)
     # def psnr(self,y_actual,y_hat):
-        
+    def PSNR(self,y_true, y_pred):
+        max_pixel = 1.0
+        return (10.0 * K.log((max_pixel ** 2) / (K.mean(K.square(y_pred - y_true), axis=-1)))) / 2.303
     def train_model(self, x_train, y_train, x_val, y_val, epochs, batch_size=20,poisson=False,laplace=False,fista=False,saveModel=False):
         """
         this is a method that is the training loop.
