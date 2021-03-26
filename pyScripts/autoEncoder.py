@@ -8,6 +8,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 import os
 from os import listdir
+import datetime
 import tensorflow as tf
 import torch
 from keras.preprocessing.image import ImageDataGenerator
@@ -105,11 +106,13 @@ class Autoencoder():
                                        patience=7,
                                        verbose=1, 
                                        mode='auto')
+        log_dir = "tbLogs/autoEncoder" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
         history = self.autoencoder_model.fit(x_train, y_train,
                                              batch_size=batch_size,
                                              epochs=epochs,
                                              validation_data=(x_val, y_val),
-                                             callbacks=[early_stopping])
+                                             callbacks=[early_stopping,tensorboard_callback])
         if saveModel:
             self.saveModel(self.autoencoder_model)
         plt.plot(history.history['loss'])

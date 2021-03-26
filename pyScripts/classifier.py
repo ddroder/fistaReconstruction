@@ -1,3 +1,4 @@
+import datetime
 import pandas as pd
 import cv2
 import matplotlib.pyplot as plt
@@ -121,7 +122,12 @@ class classifier():
         return model
     def trainModel(self,epochs,xtrain,xtest,ytrain,ytest,saveModel=False):
         model=self.classifierModel()
-        history=model.fit(xtrain,np.array(ytrain),epochs=epochs,validation_data=(xtest,np.array(ytest)))
+        log_dir = "tbLogs/Classifier" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+        history=model.fit(xtrain,np.array(ytrain),
+                            epochs=epochs,
+                            validation_data=(xtest,np.array(ytest)),
+                            callbacks=[tensorboard_callback])
         if saveModel:
             self.saveModel(model)
         plt.plot(history.history['accuracy'])

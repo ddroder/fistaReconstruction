@@ -25,4 +25,4 @@ def train_val_split(x_train, y_train):
     return x_train[train_idx], y_train[train_idx], x_train[val_idx], y_train[val_idx]
 x_train, y_train, x_val, y_val = train_val_split(x_train, y_train)
 ae = Autoencoder()
-ae.train_model(x_train, y_train, x_val, y_val, epochs=150, batch_size=20,laplace=True,saveModel=True)
+ae.train_model(x_train, y_train, x_val, y_val, epochs=150, batch_size=20,laplace=True,saveModel=False)
