@@ -1,0 +1,11 @@
+torch==1.8.0
+numpy==1.19.2
+torchvision==0.9.0.dev20210205+cu110
+opencv_python==4.5.1.48
+matplotlib==3.3.4
+pandas==1.2.3
+tensorflow==2.4.1
+Keras==2.4.3
+imutils==0.5.4
+Pillow==8.1.2
+scikit_learn==0.24.1
