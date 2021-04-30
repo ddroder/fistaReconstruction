@@ -11,6 +11,7 @@ Once in the directory, run:
 this will install all the dependencies needed to run all the code.
 
 ### Step 3: To launch tensorboard
+pip3 install tensorboard
 Once you have installed the dependencies you can run the following command to start a tensorboard instance:
 ##### "tensorboard --logdir tbLogs/autoEncoder20210326-113644" 
 (this will launch the tensorboard for the autoEncoder, if you want the classifier change autoEncoder20210326-113644 to Classifier20210326-105835)
