@@ -9,3 +9,9 @@
 
 #files to ignore
 practicing.py
+.vs/ProjectSettings.json
+.gitignore
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/fistaReconstruction/v16/.suo
+tbLogs/Classifier20210531-202745/train/events.out.tfevents.1622507265.DESKTOP-QOACLI3.20572.909.v2
